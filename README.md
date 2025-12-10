@@ -1,4 +1,4 @@
-# **Custom OTP Input**
+# **OtpAutoFill**
 
 A simple Android library and sample app to handle **OTP verification** with a custom input view.  
 Users can enter or automatically receive OTP via SMS, verify it, and handle resend with a timer.  
