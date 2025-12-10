@@ -41,7 +41,7 @@ maven { url = uri("https://jitpack.io") }
 
 ```gradle
 dependencies {
-    	        implementation 'com.github.Excelsior-Technologies-Community:OtpAutoFill:Tag'
+    	        implementation 'com.github.Excelsior-Technologies-Community:OtpAutoFill:1.0.0'
 
 }
 ```
