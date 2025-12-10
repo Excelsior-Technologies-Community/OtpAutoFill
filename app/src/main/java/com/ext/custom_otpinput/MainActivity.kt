@@ -98,13 +98,13 @@ class MainActivity : AppCompatActivity() {
             override fun onOtpReceived(otp: String) {
                 runOnUiThread {
                     otpInputView.setOtp(otp)
-                    Toast.makeText(this@MainActivity, "OTP Auto-filled ✅", Toast.LENGTH_SHORT).show()
+//                    Toast.makeText(this@MainActivity, "OTP Auto-filled ✅", Toast.LENGTH_SHORT).show()
                 }
             }
 
             override fun onOtpTimeout() {
                 runOnUiThread {
-                    Toast.makeText(this@MainActivity, "OTP Timeout ❌", Toast.LENGTH_SHORT).show()
+//                    Toast.makeText(this@MainActivity, "OTP Timeout ❌", Toast.LENGTH_SHORT).show()
                 }
             }
         })
@@ -118,7 +118,7 @@ class MainActivity : AppCompatActivity() {
         btnSendOtp.setOnClickListener {
             val phone = etPhoneNumber.text.toString().trim()
             if (phone.length != 10 || !phone.all { it.isDigit() }) {
-                Toast.makeText(this, "Enter valid 10-digit number", Toast.LENGTH_SHORT).show()
+//                Toast.makeText(this, "Enter valid 10-digit number", Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
             }
 
@@ -135,15 +135,15 @@ class MainActivity : AppCompatActivity() {
             val enteredOtp = otpInputView.getOtp()
             if (enteredOtp.length in 4..6) {
                 if (enteredOtp == generatedOtp) {
-                    Toast.makeText(this, "OTP Verified ✅", Toast.LENGTH_LONG).show()
+//                    Toast.makeText(this, "OTP Verified ✅", Toast.LENGTH_LONG).show()
                     // Go back to phone input screen instead of closing app
                     resetScreens()
                 } else {
-                    Toast.makeText(this, "OTP is incorrect ❌", Toast.LENGTH_LONG).show()
+//                    Toast.makeText(this, "OTP is incorrect ❌", Toast.LENGTH_LONG).show()
                 }
 
             } else {
-                Toast.makeText(this, "Enter full OTP", Toast.LENGTH_SHORT).show()
+//                Toast.makeText(this, "Enter full OTP", Toast.LENGTH_SHORT).show()
             }
         }
 
@@ -173,7 +173,7 @@ class MainActivity : AppCompatActivity() {
             smsManager.sendTextMessage(phoneNumber, null, message, null, null)
         } catch (e: Exception) {
             e.printStackTrace()
-            Toast.makeText(this, "SMS failed: ${e.message}", Toast.LENGTH_LONG).show()
+//            Toast.makeText(this, "SMS failed: ${e.message}", Toast.LENGTH_LONG).show()
         }
 
         OtpHelper.startSmsRetriever(this)
