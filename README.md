@@ -46,7 +46,8 @@ dependencies {
 ```
 ## ⚡ **Usage**
 
-```<com.ext.custom_otp_input.OtpInputView
+```
+<com.ext.custom_otp_input.OtpInputView
     android:id="@+id/otpInputView"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
