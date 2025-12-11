@@ -90,7 +90,63 @@ class MainActivity : AppCompatActivity() {
 ## ⚡ **For sending the OTP SMS from their app using your library:**
 ```
 // Send OTP SMS to the user's phone number
-OtpHelper.sendSmsOtp(context, phoneNumber)  // phoneNumber should include country code, e.g., "+911234567890"
+    private fun sendSmsOtp(phoneNumber: String) {
+        generatedOtp = (100000..999999).random().toString()
+        val appHash = AppSignatureHelper(this).getAppSignatures().firstOrNull() ?: "FA+AppHash"
+
+        val message = "<#> Your AppName OTP is $generatedOtp $appHash"
+
+        try {
+            val smsManager = android.telephony.SmsManager.getDefault()
+            smsManager.sendTextMessage(phoneNumber, null, message, null, null)
+        } catch (e: Exception) {
+            e.printStackTrace()
+//            Toast.makeText(this, "SMS failed: ${e.message}", Toast.LENGTH_LONG).show()
+        }
+
+        OtpHelper.startSmsRetriever(this)
+    }
+ 
+```
+ 
+```
+ private lateinit var smsReceiver: SmsReceiver
+private var generatedOtp = ""
+```
+
+```
+initializeSmsReceiver()
+
+binding.btnSendOtp.setOnClickListener {
+    val phone = binding.etPhone.text.toString().trim()
+    if (phone.length != 10 || !phone.all { it.isDigit() }) {
+        return@setOnClickListener
+    }
+
+    val countryCode = "+91"
+  val  phone1 = countryCode + phone
+    sendSmsOtp(phone1)
+}
+```
+
+```
+private fun initializeSmsReceiver() {
+    smsReceiver = SmsReceiver()
+    smsReceiver.setOtpListener(object : SmsReceiver.OtpReceivedListener {
+        override fun onOtpReceived(otp: String) {
+            runOnUiThread {
+                binding.otpInputView.setOtp(otp)
+            }
+        }
+
+        override fun onOtpTimeout() {
+            runOnUiThread {
+            }
+        }
+    })
+    OtpHelper.registerSmsReceiver(this, smsReceiver)
+}
+
 
 ```
 
