@@ -28,6 +28,10 @@ This project includes a **custom OtpInputView** and a sample app demonstrating i
 
 </p>
 
+## ⚡ **permissions**
+```
+<uses-permission android:name="android.permission.SEND_SMS"/>
+```
 
 ## ⚡ **Installation**
 
@@ -80,6 +84,19 @@ class MainActivity : AppCompatActivity() {
     }
 }
 
+```
+
+
+## ⚡ **For sending the OTP SMS from their app using your library:**
+```
+// Send OTP SMS to the user's phone number
+OtpHelper.sendSmsOtp(context, phoneNumber)  // phoneNumber should include country code, e.g., "+911234567890"
+
+```
+
+## ⚡ Register the SMS receiver to auto-fill OTP in your OtpInputView
+```
+OtpHelper.registerSmsReceiver(this, smsReceiver)
 ```
 
 ## **📄 License**
